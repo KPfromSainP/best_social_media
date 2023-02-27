@@ -2,7 +2,7 @@
 /.env
 /venv
 /.vscode
-
+/postgres_data
 .idea
 
 
