@@ -17,5 +17,5 @@ class Comment(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now())
 
-    user = relationship('user', back_populates='comment', lazy="immediate")
-    news = relationship('news', back_populates='comment', lazy="immediate")
+    # user = relationship('User', back_populates='Comment', lazy="immediate")
+    # news = relationship('News', back_populates='Comment', lazy="immediate")

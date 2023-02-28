@@ -2,12 +2,12 @@ from uuid import UUID
 from datetime import date, datetime
 
 from pydantic import BaseModel, EmailStr
-from enum import IntEnum
+from enum import StrEnum
 
 
-class Gender(IntEnum):
-    MALE = 1
-    FEMALE = 0
+class Gender(StrEnum):
+    MALE = "MALE"
+    FEMALE = "FEMALE"
 
 
 class CreateUser(BaseModel):

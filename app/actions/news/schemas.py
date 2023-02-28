@@ -7,7 +7,7 @@ from ...users.schemas import UserInDB
 
 class CreateNews(BaseModel):
     text: str
-    user_id: int | None
+    user_id: UUID | None
 
 
 class UpdateNews(BaseModel):
@@ -18,7 +18,7 @@ class NewsInDB(BaseModel):
     id: UUID
     text: str
     user: UserInDB | None
-    user_id: int | None
+    user_id: UUID | None
     created_at: datetime
 
     class Config:
