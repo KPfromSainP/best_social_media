@@ -28,3 +28,10 @@ class CommentInDB(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class CommentsInDbForUser(BaseModel):
+    comments: list[CommentInDB]
+
+    class Config:
+        orm_mode = True

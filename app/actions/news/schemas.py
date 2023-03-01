@@ -23,3 +23,9 @@ class NewsInDB(BaseModel):
 
     class Config:
         orm_mode = True
+
+class NewsInDbForUser(BaseModel):
+    news: list[NewsInDB]
+
+    class Config:
+        orm_mode = True

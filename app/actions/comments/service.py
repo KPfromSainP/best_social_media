@@ -17,11 +17,15 @@ async def get_comment(session: AsyncSession, news_id: UUID) -> Comment:
     return comment
 
 
-# async def get_all_comment(session: AsyncSession, user_id: UUID) -> List[Comment]:
-#     result = await session.execute(select(Comment).where(Comment.user_id == user_id))
-#     if result is None:
-#         raise ItemNotFound('comment for this user is not found')
-#     return result
+async def get_all_comment(session: AsyncSession, user_id: UUID) -> list[Comment]:
+    result = await session.execute(select(Comment).where(Comment.user_id == user_id))
+    comment = result.scalars()
+    comment_list = list()
+    for r in comment:
+        comment_list.append(r)
+    if comment is None:
+        raise ItemNotFound('news for this user is not found')
+    return comment_list
 
 
 async def create_comment(session: AsyncSession, data: schemas.CreateComment) -> Comment:

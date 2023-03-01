@@ -15,9 +15,9 @@ async def get_comment_by_id(comment_id: UUID, db: AsyncSession = Depends(get_ses
     return await service.get_comment(db, comment_id)
 
 
-# @comments.get('/{comment_id}')
-# async def get_all_comment_by_id(comment_id: UUID, db: AsyncSession = Depends(get_session)) -> List[schemas.CommentInDB]:
-#     return await service.get_all_comment(db, comment_id)
+@comments.get('/get_all_comments/{user_id}')
+async def get_all_comment_by_id(user_id: UUID, db: AsyncSession = Depends(get_session)) -> schemas.CommentsInDbForUser:
+    return schemas.CommentsInDbForUser(comments=await service.get_all_comment(db, user_id))
 
 
 @comments.post('/')

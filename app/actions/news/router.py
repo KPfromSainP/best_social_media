@@ -15,9 +15,11 @@ async def get_news_by_id(news_id: UUID, db: AsyncSession = Depends(get_session))
     return await service.get_news(db, news_id)
 
 
-# @news.get('/{news_id}')
-# async def get_all_news_by_id(news_id: UUID, db: AsyncSession = Depends(get_session)) -> List[schemas.NewsInDB]:
-#     return await service.get_all_news(db, news_id)
+@news.get('/get_all_news/{user_id}')
+async def get_all_news_by_id(user_id: UUID, db: AsyncSession = Depends(get_session)) -> schemas.NewsInDbForUser:
+    # return await schemas.NewsInDbForUser(service.get_all_news(db, user_id))
+    return schemas.NewsInDbForUser(news=await service.get_all_news(db, user_id))
+    # return await service.get_all_news(db, user_id)
 
 
 @news.post('/')
