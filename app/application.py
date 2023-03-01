@@ -8,7 +8,7 @@ from .actions.news.router import news as news_router
 
 
 app = FastAPI(
-    title='Car Web Service'
+    title='Social media Web Service'
 )
 
 

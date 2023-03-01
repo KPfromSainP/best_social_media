@@ -17,5 +17,7 @@ class User(Base):
     birthday = Column(Date, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    comment = relationship("Comment", backref="user", lazy='selectin')
-    news = relationship("News", backref="user", lazy='selectin')
+    comment = relationship('Comment', back_populates='user', lazy="immediate") # работает
+    news = relationship('News', back_populates='user', lazy="immediate")
+    # comment = relationship("Comment", backref="user", lazy='immediate') неработает
+    # news = relationship("News", backref="user", lazy='immediate')
