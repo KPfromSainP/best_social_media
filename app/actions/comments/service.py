@@ -1,10 +1,10 @@
-from typing import List
 from uuid import UUID
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from .models import Comment
+from ...users.models import User
 from . import schemas
 from ...exceptions import ItemNotFound
 
@@ -18,13 +18,15 @@ async def get_comment(session: AsyncSession, news_id: UUID) -> Comment:
 
 
 async def get_all_comment(session: AsyncSession, user_id: UUID) -> list[Comment]:
+    result = await session.execute(select(User).where(User.id == user_id).limit(1))
+    user = result.scalar_one_or_none()
+    if user is None:
+        raise ItemNotFound('user with this id is not found')
     result = await session.execute(select(Comment).where(Comment.user_id == user_id))
     comment = result.scalars()
-    comment_list = list()
-    for r in comment:
-        comment_list.append(r)
+    comment_list = list(comment)
     if comment is None:
-        raise ItemNotFound('news for this user is not found')
+        raise ItemNotFound('comment for this user is not found')
     return comment_list
 
 
